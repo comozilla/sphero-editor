@@ -1,16 +1,16 @@
 // Publisherは、データを保存せず、外部へ変更を知らせる機能に絞る。
 
 class Publisher {
-  constructor() {
+  constructor () {
     this.observers = {};
   }
-  subscribe(type, observer) {
+  subscribe (type, observer) {
     if (typeof this.observers[type] === "undefined") {
       this.observers[type] = [];
     }
     this.observers[type].push(observer);
   }
-  publish(type, ...nextDatas) {
+  publish (type, ...nextDatas) {
     if (type.indexOf(":") !== -1) {
       throw new Error("publishのtypeに「:」を含むことはできません。");
     }

@@ -1,6 +1,6 @@
-import assert from "assert";
+import { assert } from "chai";
 
-describe("Hello", () => {
+describe("Test1", () => {
   it("should be first test", () => {
     assert(true);
   });
