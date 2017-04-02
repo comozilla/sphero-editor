@@ -2,7 +2,6 @@
 
 class Publisher {
   constructor() {
-    this.modelObservers = {};
     this.observers = {};
   }
   subscribe(type, observer) {
