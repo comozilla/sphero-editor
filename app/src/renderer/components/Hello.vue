@@ -9,9 +9,9 @@ export default {
   data () {
     return {
       text: "Hello, World!"
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped>
