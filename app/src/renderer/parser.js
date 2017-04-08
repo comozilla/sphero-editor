@@ -5,7 +5,7 @@ export default class Parser {
     publisher.subscribe("parse", this.parse);
   }
 
-  parse(motion) {
+  parse = motion => {
     const commands = [];
     const functions = {
       roll(speed, degree) {
