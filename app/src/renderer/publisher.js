@@ -18,11 +18,11 @@ class Publisher {
       this.observers[type] = [];
     }
     this.observers[type].forEach(observer => {
-      observer.apply(null, nextDatas);
+      observer(...nextDatas);
     });
     if (typeof this.observers[type + ":after"] !== "undefined") {
       this.observers[type + ":after"].forEach(observer => {
-        observer.apply(null, nextDatas);
+        observer(...nextDatas);
       });
     }
   }

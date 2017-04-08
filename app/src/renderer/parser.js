@@ -14,5 +14,6 @@ export default class Parser {
     };
     const motionFunction = Function(...Object.keys(functions), motion);
     motionFunction(...Object.values(functions));
+    publisher.publish("run", commands);
   }
 }
