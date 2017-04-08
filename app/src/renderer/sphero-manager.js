@@ -26,9 +26,8 @@ export default class SpheroManager {
     for (let command of commands) {
       index++;
       if (command.name === "roll") {
-        console.log(command);
         this.orb.roll(command.speed, command.degree);
-        yield;
+        yield index;
       }
     }
   }
