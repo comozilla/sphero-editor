@@ -1,5 +1,5 @@
 <template>
-  <div id="#app">
+  <div id="app">
     <editor></editor>
   </div>
 </template>
@@ -14,4 +14,13 @@ export default {
 </script>
 
 <style>
+html {
+	height: 100%;
+}
+body {
+	height: 100%;
+}
+#app {
+	height: 100%;
+}
 </style>
