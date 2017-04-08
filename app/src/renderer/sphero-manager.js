@@ -10,7 +10,7 @@ export default class SpheroManager {
     publisher.subscribe("run", this.run);
     publisher.subscribe("pressedEnter", this.stepCommands);
   }
-  run = (commands) => {
+  run = commands => {
     this.iterator = this.generateSequence(commands);
     this.iterator.next();
   }
