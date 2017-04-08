@@ -5,6 +5,8 @@ Vue.use(Electron);
 Vue.config.debug = true;
 
 import App from "./App";
+import Parser from "@renderer/parser";
+new Parser();
 
 /* eslint-disable no-new */
 new Vue({
