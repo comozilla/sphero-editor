@@ -3,17 +3,18 @@ import publisher from "@renderer/publisher";
 const sphero = () => { return { roll() { } }; };
 
 export default class SpheroManager {
+  orb = null;
+  iterator = null;
   constructor(port) {
     this.orb = sphero(port);
-    this.iterator = null;
-    publisher.subscribe("run", this.run.bind(this));
-    publisher.subscribe("pressedEnter", this.stepCommands.bind(this));
+    publisher.subscribe("run", this.run);
+    publisher.subscribe("pressedEnter", this.stepCommands);
   }
-  run(commands) {
+  run = (commands) => {
     this.iterator = this.generateSequence(commands);
     this.iterator.next();
   }
-  stepCommands() {
+  stepCommands = () => {
     if (this.iterator) {
       const it = this.iterator.next();
       if (it.done) {
