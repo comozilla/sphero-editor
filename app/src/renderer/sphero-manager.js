@@ -1,6 +1,6 @@
 import publisher from "@renderer/publisher";
 //import sphero from "sphero";
-const sphero = () => { return { roll() { debugger; } }; };
+const sphero = () => { return { roll() { } }; };
 
 export default class SpheroManager {
   constructor(port) {
@@ -11,20 +11,22 @@ export default class SpheroManager {
   }
   run(commands) {
     this.iterator = this.generateSequence(commands);
-    console.log(this.iterator);
+    this.iterator.next();
   }
   stepCommands() {
     if (this.iterator) {
-      this.iterator.next();
+      const it = this.iterator.next();
+      if (it.done) {
+        this.iterator = null;
+      }
     }
   }
   generateSequence = function*(commands) {
     let index = 0;
-    console.log("B");
     for (let command of commands) {
       index++;
       if (command.name === "roll") {
-        console.log("AAA");
+        console.log(command);
         this.orb.roll(command.speed, command.degree);
         yield;
       }
