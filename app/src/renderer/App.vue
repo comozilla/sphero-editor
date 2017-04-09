@@ -15,13 +15,13 @@ export default {
 
 <style>
 html {
-	height: 100%;
+  height: 100%;
 }
 body {
-	margin: 0px;
-	height: 100%;
+  margin: 0px;
+  height: 100%;
 }
 #app {
-	height: 100%;
+  height: 100%;
 }
 </style>
