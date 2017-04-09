@@ -4,13 +4,13 @@ class Publisher {
   constructor () {
     this.observers = {};
   }
-  subscribe (type, observer) {
+  subscribe(type, observer) {
     if (typeof this.observers[type] === "undefined") {
       this.observers[type] = [];
     }
     this.observers[type].push(observer);
   }
-  publish (type, ...nextDatas) {
+  publish(type, ...nextDatas) {
     if (type.indexOf(":") !== -1) {
       throw new Error("publishのtypeに「:」を含むことはできません。");
     }
@@ -18,11 +18,11 @@ class Publisher {
       this.observers[type] = [];
     }
     this.observers[type].forEach(observer => {
-      observer.apply(null, nextDatas);
+      observer(...nextDatas);
     });
     if (typeof this.observers[type + ":after"] !== "undefined") {
       this.observers[type + ":after"].forEach(observer => {
-        observer.apply(null, nextDatas);
+        observer(...nextDatas);
       });
     }
   }
