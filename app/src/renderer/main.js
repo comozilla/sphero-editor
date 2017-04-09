@@ -8,9 +8,10 @@ import App from "./App";
 import Parser from "@renderer/parser";
 import KeyManager from "@renderer/key-manager";
 import SpheroManager from "@renderer/sphero-manager";
+const sphero = () => { return { roll() { } }; };
 new Parser();
 new KeyManager();
-new SpheroManager();
+new SpheroManager(sphero, "COM5");
 
 /* eslint-disable no-new */
 new Vue({
