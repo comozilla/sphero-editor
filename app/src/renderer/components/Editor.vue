@@ -27,14 +27,13 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background-color: #34495e;
 }
 #textarea {
   width: 100%;
-  height: 95%;
-  overflow: hidden;
+  height: calc(100% - 30px);
   resize: none;
   background-color: #34495e;
+  box-sizing: border-box;
 }
 </style>
