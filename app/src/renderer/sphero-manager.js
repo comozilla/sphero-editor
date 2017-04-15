@@ -7,6 +7,7 @@ export default class SpheroManager {
     this.orb = sphero(port);
     publisher.subscribe("run", this.run);
     publisher.subscribe("pressedEnter", this.stepCommands);
+    publisher.subscribe("stop", this.stop);
   }
   run = commands => {
     this.iterator = this.generateSequence(commands);
@@ -16,9 +17,12 @@ export default class SpheroManager {
     if (this.iterator) {
       const it = this.iterator.next();
       if (it.done) {
-        this.iterator = null;
+        publisher.publish("stop");
       }
     }
+  }
+  stop = () => {
+    this.iterator = null;
   }
   generateSequence = function*(commands) {
     let index = 0;

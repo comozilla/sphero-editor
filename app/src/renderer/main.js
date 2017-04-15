@@ -4,7 +4,7 @@ import Electron from "vue-electron";
 import "vue-material/dist/vue-material.css";
 
 Vue.use(Electron);
-Vue.use(VueMaterial);   
+Vue.use(VueMaterial);
 Vue.config.debug = true;
 
 import App from "./App";

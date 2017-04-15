@@ -4,8 +4,10 @@
   "description": "An editor for sphero",
   "main": "./dist/main.js",
   "dependencies": {
+    "brace": "^0.10.0",
     "vue": "^2.1.10",
-    "vue-electron": "^1.0.6"
+    "vue-electron": "^1.0.6",
+    "vue-material": "^0.7.1"
   },
   "optionalDependencies": {
     "serialport": "^4.0.7",

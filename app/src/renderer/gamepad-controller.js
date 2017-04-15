@@ -1,4 +1,5 @@
 import publisher from "@renderer/publisher";
+import appModel from "@renderer/app-model";
 
 export default class GamepadController {
   constructor() {
@@ -26,7 +27,11 @@ export default class GamepadController {
       if (this.getButtonPressed(gamepad.buttons[7]) === "pressed") {
         if (!this.isPressingStart) {
           this.isPressingStart = true;
-          publisher.publish("");
+          if (appModel.isPlaying) {
+            publisher.publish("stop");
+          } else {
+            publisher.publish("play");
+          }
         }
       } else {
         this.isPressingStart = false;
