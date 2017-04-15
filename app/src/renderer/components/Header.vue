@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     togglePlay() {
-      console.log(this.isPlaying);
       if (this.isPlaying) {
         publisher.publish("stop");
       } else {
