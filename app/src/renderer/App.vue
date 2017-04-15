@@ -1,51 +1,19 @@
 <template>
   <div id="app">
-    <md-whiteframe md-tag="md-toolbar" md-elevation="1" class="md-whiteframe-1dp">
-      <h1 class="md-title" style="flex: 1;">スフィロを動かそう</h1>
-      <md-button class="md-icon-button" @click.native="togglePlay">
-        <md-icon>{{ icon }}</md-icon>
-      </md-button>
-    </md-whiteframe>
+    <s-header></s-header>
     <editor></editor>
   </div>
 </template>
 
 <script>
 import Editor from "@components/Editor";
-import publisher from "@renderer/publisher";
-import appModel from "@renderer/app-model";
+import Header from "@components/Header";
 
 export default {
   components: {
-    Editor
+    Editor,
+    SHeader: Header
   },
-  data() {
-    return {
-      isPlaying: appModel.isPlaying
-    };
-  },
-  created() {
-    publisher.subscribe("play", () => {
-      this.isPlaying = true;
-    });
-    publisher.subscribe("stop", () => {
-      this.isPlaying = false;
-    })
-  },
-  methods: {
-    togglePlay() {
-      if (this.isPlaying) {
-        publisher.publish("stop");
-      } else {
-        publisher.publish("play");
-      }
-    }
-  },
-  computed: {
-    icon() {
-      return this.isPlaying ? "stop" : "play_arrow"
-    }
-  }
 };
 </script>
 
