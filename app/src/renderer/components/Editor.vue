@@ -1,4 +1,4 @@
-<template>    
+<template>
   <div id="wrapper">
     <div id="editor"></div>
   </div>
