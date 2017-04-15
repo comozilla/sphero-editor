@@ -4,6 +4,7 @@
   "description": "An editor for sphero",
   "main": "./dist/main.js",
   "dependencies": {
+    "gamepad": "^1.4.2",
     "vue": "^2.1.10",
     "vue-electron": "^1.0.6"
   },
