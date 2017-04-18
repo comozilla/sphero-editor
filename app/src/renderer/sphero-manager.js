@@ -41,7 +41,6 @@ export default class SpheroManager {
     this.orb.connect(() => {
       this.orb.color("purple");
       this.isConnecting = true;
-      this.orb.roll(100, 20);
     });
   }
   disconnect = () => {
