@@ -14,33 +14,6 @@ export default {
     Editor,
     SHeader: Header
   },
-  data() {
-    return {
-      isPlaying: appModel.isPlaying
-    };
-  },
-  created() {
-    publisher.subscribe("play", () => {
-      this.isPlaying = true;
-    });
-    publisher.subscribe("stop", () => {
-      this.isPlaying = false;
-    });
-  },
-  methods: {
-    togglePlay() {
-      if (this.isPlaying) {
-        publisher.publish("stop");
-      } else {
-        publisher.publish("play");
-      }
-    }
-  },
-  computed: {
-    icon() {
-      return this.isPlaying ? "stop" : "play_arrow";
-    }
-  }
 };
 </script>
 
