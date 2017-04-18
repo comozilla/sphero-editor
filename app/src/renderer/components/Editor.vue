@@ -1,4 +1,4 @@
-<template>    
+<template>
   <div id="wrapper">
     <div id="editor"></div>
   </div>
@@ -27,6 +27,7 @@ export default {
     session.setTabSize(2);
     session.setUseSoftTabs(true);
     this.isSetupEditor = true;
+    publisher.subscribe("play", this.submitMotion);
   },
   methods: {
     submitMotion() {
