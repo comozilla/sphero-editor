@@ -1,19 +1,17 @@
 <template>
-  <div id="app">
-    <s-header></s-header>
-    <editor></editor>
-  </div>
+  <md-whiteframe md-tag="md-toolbar" md-elevation="1" class="md-whiteframe-1dp">
+    <h1 class="md-title" style="flex: 1;">スフィロを動かそう</h1>
+    <md-button class="md-icon-button" @click.native="togglePlay">
+      <md-icon>{{ icon }}</md-icon>
+    </md-button>
+  </md-whiteframe>
 </template>
 
 <script>
-import Editor from "@components/Editor";
-import Header from "@components/Header";
+import appModel from "@renderer/app-model";
+import publisher from "@renderer/publisher";
 
 export default {
-  components: {
-    Editor,
-    SHeader: Header
-  },
   data() {
     return {
       isPlaying: appModel.isPlaying
@@ -44,17 +42,6 @@ export default {
 };
 </script>
 
-<style>
-html {
-  height: 100%;
-}
-body {
-  margin: 0px;
-  height: 100%;
-}
-#app {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
+<style scoped>
+
 </style>
