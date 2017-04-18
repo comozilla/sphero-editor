@@ -10,9 +10,7 @@
     "vue-material": "^0.7.1"
   },
   "optionalDependencies": {
-    "serialport": "^4.0.7",
     "sphero": "^0.9.2"
   },
-  "devDependencies": {},
   "author": "comozilla"
 }

@@ -30,7 +30,7 @@ export default {
     });
     publisher.subscribe("stop", () => {
       this.isPlaying = false;
-    })
+    });
   },
   methods: {
     togglePlay() {
@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     icon() {
-      return this.isPlaying ? "stop" : "play_arrow"
+      return this.isPlaying ? "stop" : "play_arrow";
     }
   }
 };

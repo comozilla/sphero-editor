@@ -12,8 +12,9 @@ import Parser from "@renderer/parser";
 import KeyManager from "@renderer/key-manager";
 import SpheroManager from "@renderer/sphero-manager";
 import GamepadController from "@renderer/gamepad-controller";
+import { remote } from "electron";
+const sphero = remote.require("sphero");
 
-const sphero = () => { return { roll() { } }; };
 new Parser();
 new KeyManager();
 new SpheroManager(sphero, "COM5");
