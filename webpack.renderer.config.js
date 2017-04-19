@@ -10,13 +10,17 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const ignoreExternals = [
+  "brace"
+];
+
 let rendererConfig = {
   devtool: '#eval-source-map',
   devServer: { overlay: true },
   entry: {
     renderer: path.join(__dirname, 'app/src/renderer/main.js')
   },
-  externals: Object.keys(pkg.dependencies || {}),
+  externals: Object.keys(pkg.dependencies || {}).filter(p => ignoreExternals.indexOf(p) === -1),
   module: {
     rules: [
       {
@@ -98,6 +102,7 @@ let rendererConfig = {
     alias: {
       '@components': path.join(__dirname, 'app/src/renderer/components'),
       '@renderer': path.join(__dirname, 'app/src/renderer'),
+      'w3c-blob': path.join(__dirname, 'alias/blob.js')
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],
     modules: [
