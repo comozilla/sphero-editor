@@ -1,6 +1,6 @@
 <template>
   <md-whiteframe md-tag="md-toolbar" md-elevation="1" class="md-whiteframe-1dp">
-    <h1 class="md-title" style="flex: 1;">スフィロを動かそう</h1>
+    <h1 class="md-title">スフィロを動かそう</h1>
     <md-button class="md-icon-button" @click.native="togglePlay">
       <md-icon>{{ icon }}</md-icon>
     </md-button>
@@ -43,5 +43,7 @@ export default {
 </script>
 
 <style scoped>
-
+h1 {
+  flex: 1;
+}
 </style>
