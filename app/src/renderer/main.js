@@ -22,7 +22,7 @@ const sphero = !config.sphero.isTestMode ? remote.require("sphero") : () => {
     disconnect() {},
     startCalibration() {},
     finishCalibration() {}
-  }
+  };
 };
 
 new Parser();
