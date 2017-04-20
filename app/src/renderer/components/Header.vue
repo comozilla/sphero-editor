@@ -4,6 +4,9 @@
     <md-button class="md-icon-button" @click.native="togglePlay">
       <md-icon>{{ icon }}</md-icon>
     </md-button>
+    <md-button :class="calibrationClasses" @click.native="toggleCalibration">
+      <md-icon>nfc</md-icon>
+    </md-button>
   </md-whiteframe>
 </template>
 
@@ -14,7 +17,8 @@ import publisher from "@renderer/publisher";
 export default {
   data() {
     return {
-      isPlaying: appModel.isPlaying
+      isPlaying: appModel.isPlaying,
+      isCalibrating: appModel.isCalibrating
     };
   },
   created() {
@@ -24,6 +28,9 @@ export default {
     publisher.subscribe("stop", () => {
       this.isPlaying = false;
     });
+    publisher.subscribe("updateCalibrating", isCalibrating => {
+      this.isCalibrating = isCalibrating;
+    });
   },
   methods: {
     togglePlay() {
@@ -32,11 +39,20 @@ export default {
       } else {
         publisher.publish("play");
       }
+    },
+    toggleCalibration() {
+      publisher.publish("updateCalibrating", !this.isCalibrating);
     }
   },
   computed: {
     icon() {
       return this.isPlaying ? "stop" : "play_arrow";
+    },
+    calibrationClasses() {
+      return {
+        "md-icon-button": true,
+        "md-accent": this.isCalibrating
+      };
     }
   }
 };

@@ -9,6 +9,7 @@ export default class SpheroManager {
     publisher.subscribe("run", this.run);
     publisher.subscribe("pressedEnter", this.stepCommands);
     publisher.subscribe("stop", this.stop);
+    publisher.subscribe("updateCalibrating", this.updateCalibration);
     this.connect();
     window.addEventListener("beforeunload", this.disconnect);
   }
@@ -46,6 +47,13 @@ export default class SpheroManager {
   disconnect = () => {
     if (this.isConnecting) {
       this.orb.disconnect();
+    }
+  }
+  updateCalibration = isCalibrating => {
+    if (isCalibrating) {
+      this.orb.startCalibration();
+    } else {
+      this.orb.finishCalibration();
     }
   }
 }
