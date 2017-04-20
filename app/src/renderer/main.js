@@ -15,8 +15,15 @@ import SpheroManager from "@renderer/sphero-manager";
 import GamepadController from "@renderer/gamepad-controller";
 import { remote } from "electron";
 
-// const sphero = remote.require("sphero");
-const sphero = () => { return { roll() {}, connect() {}, disconnect() {}, startCalibration() {}, finishCalibration() {} }};
+const sphero = !config.sphero.isTestMode ? remote.require("sphero") : () => {
+  return {
+    roll() {},
+    connect() {},
+    disconnect() {},
+    startCalibration() {},
+    finishCalibration() {}
+  }
+};
 
 new Parser();
 new KeyManager();
