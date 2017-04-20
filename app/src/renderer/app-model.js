@@ -14,7 +14,7 @@ export class AppModel {
   setToStopping = () => {
     this.isPlaying = false;
   }
-  updateCalibrating = (isCalibrating) => {
+  updateCalibrating = isCalibrating => {
     this.isCalibrating = isCalibrating;
   }
 }
