@@ -12,10 +12,7 @@ let END = "\x1b[0m";
 let isElectronOpen = false;
 
 function format (command, data, color) {
-  return color + command + END +
-    "  " + // Two space offset
-    data.toString().trim().replace(/\n/g, "\n" + repeat(" ", command.length + 2)) +
-    "\n";
+  return `${ color }${ command }${ END }  ${ data.toString().trim().replace(/\n/g, "\n" + repeat(" ", command.length + 2)) }\n`
 }
 
 function repeat (str, times) {
