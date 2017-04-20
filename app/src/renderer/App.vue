@@ -1,15 +1,19 @@
 <template>
   <div id="app">
+    <s-header></s-header>
     <editor></editor>
   </div>
 </template>
 
 <script>
 import Editor from "@components/Editor";
+import Header from "@components/Header";
+
 export default {
   components: {
-    Editor
-  }
+    Editor,
+    SHeader: Header
+  },
 };
 </script>
 
@@ -23,5 +27,7 @@ body {
 }
 #app {
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>

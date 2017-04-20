@@ -3,10 +3,14 @@ import publisher from "@renderer/publisher";
 export default class SpheroManager {
   orb = null;
   iterator = null;
+  isConnecting = false;
   constructor(sphero, port) {
     this.orb = sphero(port);
     publisher.subscribe("run", this.run);
     publisher.subscribe("pressedEnter", this.stepCommands);
+    publisher.subscribe("stop", this.stop);
+    this.connect();
+    window.addEventListener("beforeunload", this.disconnect);
   }
   run = commands => {
     this.iterator = this.generateSequence(commands);
@@ -16,9 +20,12 @@ export default class SpheroManager {
     if (this.iterator) {
       const it = this.iterator.next();
       if (it.done) {
-        this.iterator = null;
+        publisher.publish("stop");
       }
     }
+  }
+  stop = () => {
+    this.iterator = null;
   }
   generateSequence = function*(commands) {
     let index = 0;
@@ -28,6 +35,17 @@ export default class SpheroManager {
         this.orb.roll(command.speed, command.degree);
         yield index;
       }
+    }
+  }
+  connect() {
+    this.orb.connect(() => {
+      this.orb.color("purple");
+      this.isConnecting = true;
+    });
+  }
+  disconnect = () => {
+    if (this.isConnecting) {
+      this.orb.disconnect();
     }
   }
 }
