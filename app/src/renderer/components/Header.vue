@@ -22,7 +22,7 @@ export default {
     };
   },
   created() {
-    publisher.subscribe("play", () => {
+    publisher.subscribe("run", () => {
       this.isPlaying = true;
     });
     publisher.subscribe("stop", () => {
