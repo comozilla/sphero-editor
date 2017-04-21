@@ -4,7 +4,7 @@ export class AppModel {
   constructor() {
     this.isPlaying = false;
     this.isCalibrating = false;
-    publisher.subscribe("play", this.setToPlaying);
+    publisher.subscribe("run", this.setToPlaying);
     publisher.subscribe("stop", this.setToStopping);
     publisher.subscribe("updateCalibrating", this.updateCalibrating);
   }

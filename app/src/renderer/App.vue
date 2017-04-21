@@ -2,17 +2,20 @@
   <div id="app">
     <s-header></s-header>
     <editor></editor>
+    <error-tracker></error-tracker>
   </div>
 </template>
 
 <script>
 import Editor from "@components/Editor";
 import Header from "@components/Header";
+import ErrorTracker from "@components/ErrorTracker";
 
 export default {
   components: {
     Editor,
-    SHeader: Header
+    SHeader: Header,
+    ErrorTracker
   },
 };
 </script>
