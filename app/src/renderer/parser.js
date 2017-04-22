@@ -24,12 +24,14 @@ export default class Parser {
     const commands = [];
     let errors = [];
     const functions = {
-      roll(speed, degree) {
-        errors = errors.concat(checkArguments(arguments, ["number", "number"]));
-        commands.push({ name: "roll", speed, degree });
+      roll(speed, degree, time) {
+        errors = errors.concat(checkArguments(arguments, ["number", "number", "number"]));
+        commands.push({ name: "roll", speed, degree, time });
       },
-      stop() {
-        commands.push({ name: "roll", speed: 0, degree: 0 });
+      stop(time) {
+        errors = errors.concat(checkArguments(arguments, ["number"]));
+        //commands.push({ name: "roll", speed: 0, degree: 0, time });
+        commands.push({ name: "stop", time });
       }
     };
     try {
