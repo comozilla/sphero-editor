@@ -27,6 +27,9 @@ export default class Parser {
       roll(speed, degree) {
         errors = errors.concat(checkArguments(arguments, ["number", "number"]));
         commands.push({ name: "roll", speed, degree });
+      },
+      stop() {
+        commands.push({ name: "roll", speed: 0, degree: 0 });
       }
     };
     try {
