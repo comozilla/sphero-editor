@@ -29,10 +29,12 @@ export default class GamepadController {
         publisher.publish("pressedEnter");
       }
       if (this.isButtonPressed(gamepad.buttons[config.gamepad.playButton])) {
-        if (appModel.isPlaying) {
-          publisher.publish("stop");
-        } else {
-          publisher.publish("play");
+        if (!appModel.isCalibrating) {
+          if (appModel.isPlaying) {
+            publisher.publish("stop");
+          } else {
+            publisher.publish("play");
+          }
         }
       }
       if (this.isButtonPressed(gamepad.buttons[config.gamepad.calibrationButton])) {

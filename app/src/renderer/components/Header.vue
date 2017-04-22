@@ -34,10 +34,12 @@ export default {
   },
   methods: {
     togglePlay() {
-      if (this.isPlaying) {
-        publisher.publish("stop");
-      } else {
-        publisher.publish("play");
+      if (!this.isCalibrating) {
+        if (this.isPlaying) {
+          publisher.publish("stop");
+        } else {
+          publisher.publish("play");
+        }
       }
     },
     toggleCalibration() {
