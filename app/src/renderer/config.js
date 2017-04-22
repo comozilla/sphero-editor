@@ -4,6 +4,7 @@ export default {
   },
   sphero: {
     COMPort: "COM5",
-    isTestMode: false
+    isTestMode: false,
+    rollInterval: 1000
   }
 };

@@ -1,9 +1,11 @@
 import publisher from "@renderer/publisher";
+import config from "@renderer/config";
 
 export default class SpheroManager {
   orb = null;
   iterator = null;
   isConnecting = false;
+  timeoutId = null;
   constructor(sphero, port) {
     this.orb = sphero(port);
     publisher.subscribe("run", this.run);
@@ -33,7 +35,10 @@ export default class SpheroManager {
     for (let command of commands) {
       index++;
       if (command.name === "roll") {
-        this.orb.roll(command.speed, command.degree);
+        if (this.timeoutId) {
+          clearTimeout(this.timeoutId);
+        }
+        this.roll(command.speed, command.degree);
         yield index;
       }
     }
@@ -55,5 +60,9 @@ export default class SpheroManager {
     } else {
       this.orb.finishCalibration();
     }
+  }
+  roll = (speed, degree) => {
+    this.orb.roll(speed, degree);
+    this.timeoutId = setTimeout(this.roll, config.sphero.rollInterval, speed, degree);
   }
 }
