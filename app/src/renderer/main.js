@@ -10,7 +10,6 @@ Vue.config.debug = config.vue.isDebug;
 
 import App from "./App";
 import Parser from "@renderer/parser";
-import KeyManager from "@renderer/key-manager";
 import SpheroManager from "@renderer/sphero-manager";
 import GamepadController from "@renderer/gamepad-controller";
 import Backup from "@renderer/backup";
@@ -29,7 +28,6 @@ const sphero = !config.sphero.isTestMode ? remote.require("sphero") : () => {
 };
 
 new Parser();
-new KeyManager();
 new SpheroManager(sphero, config.sphero.COMPort);
 new GamepadController();
 new Backup();

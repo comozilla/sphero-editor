@@ -25,9 +25,6 @@ export default class GamepadController {
   loop = () => {
     const gamepad = navigator.getGamepads()[config.gamepad.index];
     if (gamepad) {
-      if (this.isButtonPressed(gamepad.buttons[config.gamepad.stepButton])) {
-        publisher.publish("pressedEnter");
-      }
       if (this.isButtonPressed(gamepad.buttons[config.gamepad.playButton])) {
         if (!appModel.isCalibrating) {
           if (appModel.isPlaying) {

@@ -10,7 +10,6 @@ export default class SpheroManager {
   constructor(sphero, port) {
     this.orb = sphero(port);
     publisher.subscribe("run:after", this.run);
-    //publisher.subscribe("pressedEnter", this.stepCommands);
     publisher.subscribe("stop", this.stop);
     publisher.subscribe("updateCalibrating", this.updateCalibration);
     this.connect();

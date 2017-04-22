@@ -9,7 +9,6 @@ export default {
   },
   gamepad: {
     index: 0,
-    stepButton: 0,
     playButton: 7,
     calibrationButton: 6
   }

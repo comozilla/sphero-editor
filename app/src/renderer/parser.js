@@ -30,7 +30,6 @@ export default class Parser {
       },
       stop(time) {
         errors = errors.concat(checkArguments(arguments, ["number"]));
-        //commands.push({ name: "roll", speed: 0, degree: 0, time });
         commands.push({ name: "stop", time });
       }
     };
