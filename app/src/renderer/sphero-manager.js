@@ -45,12 +45,12 @@ export default class SpheroManager {
         currentDegree = command.degree;
         this.orb.roll(0, command.degree);
         setTimeout(() => {
-          this.roll(command.speed, command.degree, command.time);
-          this.stepTimeoutId = setTimeout(this.stepCommands, command.time);
+          this.roll(command.speed, command.degree, command.time * 1000);
+          this.stepTimeoutId = setTimeout(this.stepCommands, command.time * 1000);
         }, config.sphero.rotateInterval);
       } else if (command.name === "stop") {
         this.orb.roll(0, currentDegree);
-        this.stepTimeoutId = setTimeout(this.stepCommands, command.time);
+        this.stepTimeoutId = setTimeout(this.stepCommands, command.time * 1000);
       }
       yield index;
     }

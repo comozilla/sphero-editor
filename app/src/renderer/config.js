@@ -6,7 +6,7 @@ export default {
     COMPort: "COM5",
     isTestMode: false,
     rollInterval: 1000,
-    rotateInterval: 500
+    rotateInterval: 750
   },
   gamepad: {
     index: 0,
