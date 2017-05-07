@@ -26,11 +26,15 @@ export default class Parser {
     const functions = {
       roll(speed, degree, time) {
         errors = errors.concat(checkArguments(arguments, ["number", "number", "number"]));
-        commands.push({ name: "roll", speed, degree, time });
+        if (errors.length === 0) {
+          commands.push({ name: "roll", speed, degree, time });
+        }
       },
       stop(time) {
         errors = errors.concat(checkArguments(arguments, ["number"]));
-        commands.push({ name: "stop", time });
+        if (errors.length === 0) {
+          commands.push({ name: "stop", time });
+        }
       }
     };
     try {

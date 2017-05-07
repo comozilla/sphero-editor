@@ -36,6 +36,7 @@ export default class SpheroManager {
   generateSequence = function*(commands) {
     let index = 0;
     let currentDegree = 0;
+    const useMillisecond = config.Millisecond === true ? 1000 : 0;
     for (let command of commands) {
       index++;
       if (this.timeoutId) {
@@ -45,12 +46,12 @@ export default class SpheroManager {
         currentDegree = command.degree;
         this.orb.roll(0, command.degree);
         setTimeout(() => {
-          this.roll(command.speed, command.degree, command.time * 1000);
-          this.stepTimeoutId = setTimeout(this.stepCommands, command.time * 1000);
+          this.roll(command.speed, command.degree, command.time * useMillisecond);
+          this.stepTimeoutId = setTimeout(this.stepCommands, command.time * useMillisecond);
         }, config.sphero.rotateInterval);
       } else if (command.name === "stop") {
         this.orb.roll(0, currentDegree);
-        this.stepTimeoutId = setTimeout(this.stepCommands, command.time * 1000);
+        this.stepTimeoutId = setTimeout(this.stepCommands, command.time * useMillisecond);
       }
       yield index;
     }
