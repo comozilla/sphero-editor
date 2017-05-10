@@ -7,7 +7,8 @@ export default {
     isTestMode: false,
     rollInterval: 1000,
     rotateInterval: 750,
-    isMillisecond: false
+    // コマンドの時間を、秒にするかどうか
+    isSecondUnit: false
   },
   gamepad: {
     index: 0,
