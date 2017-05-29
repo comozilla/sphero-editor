@@ -74,7 +74,7 @@ export default class SpheroManager {
       this.orb.finishCalibration();
     }
   }
-  roll = (speed, degree, time) => {
+  roll = (speed, degree) => {
     this.orb.roll(speed, degree);
     this.timeoutId = setTimeout(this.roll, config.sphero.rollInterval, speed, degree)
   }
