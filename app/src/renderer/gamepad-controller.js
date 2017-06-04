@@ -3,22 +3,22 @@ import appModel from "@renderer/app-model";
 import config from "@renderer/config";
 
 export default class GamepadController {
-  isPressing = [];
+  pressingButtons = [];
   constructor() {
     this.loop();
   }
   isButtonPressed(button) {
     const isPressed = typeof button === "object" ? button.pressed : button === 1;
-    const index = this.isPressing.indexOf(button);
+    const index = this.pressingButtons.indexOf(button);
     if (isPressed) {
       if (index === -1) {
-        this.isPressing.push(button);
+        this.pressingButtons.push(button);
         return true;
       }
       return false;
     }
     if (index >= 0) {
-      this.isPressing.splice(index, 1);
+      this.pressingButtons.splice(index, 1);
     }
     return false;
   }
