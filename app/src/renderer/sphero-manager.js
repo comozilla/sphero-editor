@@ -16,7 +16,7 @@ export default class SpheroManager {
     window.addEventListener("beforeunload", this.disconnect);
   }
   run = commands => {
-    this.orb.color("purple");
+    this.orb.color(config.sphero.defaultColor);
     this.iterator = this.generateSequence(commands);
     this.stepCommands();
   }
@@ -58,7 +58,7 @@ export default class SpheroManager {
   }
   connect() {
     this.orb.connect(() => {
-      this.orb.color("purple");
+      this.orb.color(config.sphero.defaultColor);
       this.isConnecting = true;
     });
   }

@@ -4,6 +4,7 @@ export default {
   },
   sphero: {
     COMPort: "COM5",
+    defaultColor: "purple",
     isTestMode: false,
     rollInterval: 1000,
     rotateInterval: 750,
