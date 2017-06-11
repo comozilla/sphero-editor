@@ -1,40 +1,41 @@
 import publisher from "@renderer/publisher";
 import appModel from "@renderer/app-model";
+import config from "@renderer/config";
 
 export default class GamepadController {
+  pressingButtons = [];
   constructor() {
-    this.isPressingStep = false;
-    this.isPressingStart = false;
     this.loop();
   }
-  getButtonPressed(button) {
-    if (typeof button === "object") {
-      return button.pressed ? "pressed" : "unpressed";
+  isButtonPressed(button) {
+    const isPressed = typeof button === "object" ? button.pressed : button === 1;
+    const index = this.pressingButtons.indexOf(button);
+    if (isPressed) {
+      if (index === -1) {
+        this.pressingButtons.push(button);
+        return true;
+      }
+      return false;
     }
-    return button === 1 ? "pressed" : "undefined";
+    if (index >= 0) {
+      this.pressingButtons.splice(index, 1);
+    }
+    return false;
   }
   loop = () => {
-    const gamepad = navigator.getGamepads()[2];
+    const gamepad = navigator.getGamepads()[config.gamepad.index];
     if (gamepad) {
-      if (this.getButtonPressed(gamepad.buttons[0]) === "pressed") {
-        if (!this.isPressingStep) {
-          this.isPressingStep = true;
-          publisher.publish("pressedEnter");
-        }
-      } else {
-        this.isPressingStep = false;
-      }
-      if (this.getButtonPressed(gamepad.buttons[7]) === "pressed") {
-        if (!this.isPressingStart) {
-          this.isPressingStart = true;
+      if (this.isButtonPressed(gamepad.buttons[config.gamepad.playButton])) {
+        if (!appModel.isCalibrating) {
           if (appModel.isPlaying) {
             publisher.publish("stop");
           } else {
             publisher.publish("play");
           }
         }
-      } else {
-        this.isPressingStart = false;
+      }
+      if (this.isButtonPressed(gamepad.buttons[config.gamepad.calibrationButton])) {
+        publisher.publish("updateCalibrating", !appModel.isCalibrating);
       }
     }
     requestAnimationFrame(this.loop);

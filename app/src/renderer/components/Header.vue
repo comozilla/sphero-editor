@@ -22,7 +22,7 @@ export default {
     };
   },
   created() {
-    publisher.subscribe("play", () => {
+    publisher.subscribe("run", () => {
       this.isPlaying = true;
     });
     publisher.subscribe("stop", () => {
@@ -34,10 +34,12 @@ export default {
   },
   methods: {
     togglePlay() {
-      if (this.isPlaying) {
-        publisher.publish("stop");
-      } else {
-        publisher.publish("play");
+      if (!this.isCalibrating) {
+        if (this.isPlaying) {
+          publisher.publish("stop");
+        } else {
+          publisher.publish("play");
+        }
       }
     },
     toggleCalibration() {

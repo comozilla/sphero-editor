@@ -28,6 +28,10 @@ export default {
     session.setUseSoftTabs(true);
     this.isSetupEditor = true;
     publisher.subscribe("play", this.submitMotion);
+    publisher.subscribe("restore", motion => {
+      this.editor.setValue(motion);
+    });
+    publisher.publish("loadedEditor");
   },
   methods: {
     submitMotion() {

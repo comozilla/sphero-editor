@@ -1,19 +1,22 @@
 import publisher from "@renderer/publisher";
+import config from "@renderer/config";
 
 export default class SpheroManager {
   orb = null;
   iterator = null;
   isConnecting = false;
+  timeoutId = null;
+  stepTimeoutId = null;
   constructor(sphero, port) {
     this.orb = sphero(port);
-    publisher.subscribe("run", this.run);
-    publisher.subscribe("pressedEnter", this.stepCommands);
+    publisher.subscribe("run:after", this.run);
     publisher.subscribe("stop", this.stop);
     publisher.subscribe("updateCalibrating", this.updateCalibration);
     this.connect();
     window.addEventListener("beforeunload", this.disconnect);
   }
   run = commands => {
+    this.orb.color(config.sphero.defaultColor);
     this.iterator = this.generateSequence(commands);
     this.stepCommands();
   }
@@ -27,20 +30,35 @@ export default class SpheroManager {
   }
   stop = () => {
     this.iterator = null;
+    clearTimeout(this.timeoutId);
+    this.orb.stop();
   }
   generateSequence = function*(commands) {
     let index = 0;
+    let currentDegree = 0;
+    const commandTimeAcceleration = config.isSecondUnit ? 1000 : 1;
     for (let command of commands) {
       index++;
-      if (command.name === "roll") {
-        this.orb.roll(command.speed, command.degree);
-        yield index;
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
       }
+      if (command.name === "roll") {
+        currentDegree = command.degree;
+        this.orb.roll(0, command.degree);
+        setTimeout(() => {
+          this.roll(command.speed, command.degree, command.time * commandTimeAcceleration);
+          this.stepTimeoutId = setTimeout(this.stepCommands, command.time * commandTimeAcceleration);
+        }, config.sphero.rotateInterval);
+      } else if (command.name === "stop") {
+        this.orb.roll(0, currentDegree);
+        this.stepTimeoutId = setTimeout(this.stepCommands, command.time * commandTimeAcceleration);
+      }
+      yield index;
     }
   }
   connect() {
     this.orb.connect(() => {
-      this.orb.color("purple");
+      this.orb.color(config.sphero.defaultColor);
       this.isConnecting = true;
     });
   }
@@ -55,5 +73,9 @@ export default class SpheroManager {
     } else {
       this.orb.finishCalibration();
     }
+  }
+  roll = (speed, degree) => {
+    this.orb.roll(speed, degree);
+    this.timeoutId = setTimeout(this.roll, config.sphero.rollInterval, speed, degree)
   }
 }

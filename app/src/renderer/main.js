@@ -10,10 +10,11 @@ Vue.config.debug = config.vue.isDebug;
 
 import App from "./App";
 import Parser from "@renderer/parser";
-import KeyManager from "@renderer/key-manager";
 import SpheroManager from "@renderer/sphero-manager";
 import GamepadController from "@renderer/gamepad-controller";
+import Backup from "@renderer/backup";
 import { remote } from "electron";
+import "@renderer/app-model";
 
 const sphero = !config.sphero.isTestMode ? remote.require("sphero") : () => {
   return {
@@ -21,14 +22,15 @@ const sphero = !config.sphero.isTestMode ? remote.require("sphero") : () => {
     connect() {},
     disconnect() {},
     startCalibration() {},
-    finishCalibration() {}
+    finishCalibration() {},
+    color() {}
   };
 };
 
 new Parser();
-new KeyManager();
 new SpheroManager(sphero, config.sphero.COMPort);
 new GamepadController();
+new Backup();
 
 /* eslint-disable no-new */
 new Vue({
